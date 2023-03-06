@@ -50,5 +50,7 @@ public class GUI extends JFrame {
     		entry.getKey().setText(str);
     	}
     }
+
+
     
 }

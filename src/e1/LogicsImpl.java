@@ -1,5 +1,6 @@
 package e1;
 
+import javax.management.InstanceNotFoundException;
 import java.util.*;
 
 public class LogicsImpl implements Logics {
@@ -14,6 +15,12 @@ public class LogicsImpl implements Logics {
         this.pawn = this.randomEmptyPosition();
         this.knight = this.randomEmptyPosition();	
     }
+
+	public LogicsImpl(int size, Pair<Integer, Integer> knight, Pair<Integer, Integer> pawn){
+		this.size = size;
+		this.pawn = new Pair<>(pawn.getX(), pawn.getY());
+		this.knight = new Pair<>(knight.getX(), knight.getY());
+	}
     
 	private final Pair<Integer,Integer> randomEmptyPosition(){
     	Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
