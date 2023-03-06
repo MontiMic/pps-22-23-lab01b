@@ -1,5 +1,5 @@
 package e1;
 
 public interface MovementStrategy {
-    public boolean isLegalMove(int row, int col);
+    boolean isLegalMove(Logics logics, int row, int col);
 }
