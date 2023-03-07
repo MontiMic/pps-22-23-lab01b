@@ -15,7 +15,7 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public Object getNumberOfMines() {
+    public int getNumberOfMines() {
         return this.mines.size();
     }
 }
