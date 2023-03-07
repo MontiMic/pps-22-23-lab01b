@@ -8,7 +8,6 @@ class MinesweeperTests {
 
     private Logics logic;
     private final static int SIZE = 9;
-    private final static int MINES = 10;
 
     @BeforeEach
     void setUp(){
