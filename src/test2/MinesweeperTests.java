@@ -1,4 +1,5 @@
 package test2;
+import e1.Pair;
 import e2.Logics;
 import e2.LogicsImpl;
 import org.junit.jupiter.api.*;
@@ -16,5 +17,10 @@ class MinesweeperTests {
     @Test
     void testNumberOfMines(){
         assertEquals(10, this.logic.getNumberOfMines());
+    }
+
+    @Test
+    void testLoseByHittingMine(){
+        assertFalse(this.logic.hit(0, 0));
     }
 }

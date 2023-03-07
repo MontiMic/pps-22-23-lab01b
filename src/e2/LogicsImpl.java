@@ -18,4 +18,9 @@ public class LogicsImpl implements Logics {
     public int getNumberOfMines() {
         return this.mines.size();
     }
+
+    @Override
+    public boolean hit(int x, int y) {
+        return false;
+    }
 }
