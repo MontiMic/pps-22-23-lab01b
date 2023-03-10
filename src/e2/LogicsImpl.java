@@ -20,7 +20,7 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public boolean hit(int x, int y) {
-        return false;
+    public int hit(Pair<Integer, Integer> pos) {
+        return this.mines.contains(pos) ? -1 : 0;
     }
 }
