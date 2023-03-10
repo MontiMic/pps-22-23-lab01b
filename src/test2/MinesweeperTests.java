@@ -31,4 +31,16 @@ class MinesweeperTests {
         }
         assertEquals(this.logic.getNumberOfMines(), count);
     }
+    @Test
+    void testCountOpenCells(){
+        int count = 0;
+        for (int i = 0; i < SIZE; i++){
+            for (int j = 0; j < SIZE; j++) {
+                if (this.logic.hit(new Pair<>(i, j)) >= 0) {
+                    count = count + 1;
+                }
+            }
+        }
+        assertEquals(count, this.logic.getOpenCells().size());
+    }
 }

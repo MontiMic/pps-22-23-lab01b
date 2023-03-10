@@ -5,6 +5,7 @@ import java.util.*;
 public class LogicsImpl implements Logics {
 
     private final Set<Pair<Integer, Integer>> mines = new HashSet<>();
+    private final Map<Pair<Integer, Integer>, Integer> cells = new HashMap<>();
     private final static int NUMBER_OF_MINES = 10;
 
     public LogicsImpl(int size) {
@@ -21,6 +22,17 @@ public class LogicsImpl implements Logics {
 
     @Override
     public int hit(Pair<Integer, Integer> pos) {
-        return this.mines.contains(pos) ? -1 : 0;
+        if (this.mines.contains(pos)){
+            return -1;
+        } else {
+            this.cells.put(pos, 0);
+            return 0;
+        }
     }
+
+    @Override
+    public Map<Pair<Integer, Integer>, Integer> getOpenCells() {
+        return this.cells;
+    }
+
 }
