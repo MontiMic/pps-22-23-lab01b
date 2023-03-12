@@ -15,6 +15,10 @@ public class LogicsImpl implements Logics {
         }
     }
 
+    public LogicsImpl(Set<Pair<Integer, Integer>> mines){
+        this.mines.addAll(mines);
+    }
+
     @Override
     public int getNumberOfMines() {
         return this.mines.size();
@@ -25,8 +29,16 @@ public class LogicsImpl implements Logics {
         if (this.mines.contains(pos)){
             return -1;
         } else {
-            this.cells.put(pos, 0);
-            return 0;
+            int count = 0;
+            for (int i = -1; i < 2; i++){
+                for (int j = -1; j < 2; j++){
+                    if (this.mines.contains(new Pair<>(pos.getX() + i, pos.getY() + j))){
+                        count = count + 1;
+                    }
+                }
+            }
+            this.cells.put(pos, count);
+            return count;
         }
     }
 
