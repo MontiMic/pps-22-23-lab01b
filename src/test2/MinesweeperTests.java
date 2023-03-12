@@ -49,4 +49,10 @@ class MinesweeperTests {
     void testCountNonZeros(){
         assertNotEquals(0, this.logic.hit(new Pair<>(5, 0)));
     }
+
+    @Test
+    void testAutoExpansion(){
+        assertEquals(0, this.logic.hit(new Pair<>(9, 9)));
+        assertNotEquals(1, this.logic.getOpenCells().size());
+    }
 }

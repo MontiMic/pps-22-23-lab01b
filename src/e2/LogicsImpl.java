@@ -7,6 +7,7 @@ public class LogicsImpl implements Logics {
     private final Set<Pair<Integer, Integer>> mines = new HashSet<>();
     private final Map<Pair<Integer, Integer>, Integer> cells = new HashMap<>();
     private final static int NUMBER_OF_MINES = 10;
+    private final static int SIZE = 9;
 
     public LogicsImpl(int size) {
         Random random = new Random();
@@ -29,16 +30,37 @@ public class LogicsImpl implements Logics {
         if (this.mines.contains(pos)){
             return -1;
         } else {
-            int count = 0;
-            for (int i = -1; i < 2; i++){
-                for (int j = -1; j < 2; j++){
-                    if (this.mines.contains(new Pair<>(pos.getX() + i, pos.getY() + j))){
-                        count = count + 1;
+            int count = this.countAdjacentMines(pos);
+            this.cells.put(pos, count);
+            if (count == 0){
+                this.autoExpand(pos);
+            }
+            return count;
+        }
+    }
+
+    private int countAdjacentMines(Pair<Integer, Integer> pos){
+        int counter = 0;
+        for (int i = -1; i < 2; i++){
+            for (int j = -1; j < 2; j++){
+                if (this.mines.contains(new Pair<>(pos.getX() + i, pos.getY() + j))){
+                    counter = counter + 1;
+                }
+            }
+        }
+        return counter;
+    }
+
+    private void autoExpand(Pair<Integer, Integer> pos){
+        for (int i = -1; i < 2; i++){
+            for (int j = -1; j < 2; j++){
+                Pair<Integer, Integer> neighbor = new Pair<>(pos.getX() + i, pos.getY() + j);
+                if (neighbor.getX() < SIZE && neighbor.getY() < SIZE && neighbor.getX() >=0 && neighbor.getY() >=0 && !neighbor.equals(pos)){
+                    if (!this.getOpenCells().containsKey(neighbor)){
+                        this.hit(neighbor);
                     }
                 }
             }
-            this.cells.put(pos, count);
-            return count;
         }
     }
 
