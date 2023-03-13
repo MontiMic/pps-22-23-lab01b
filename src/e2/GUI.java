@@ -28,18 +28,23 @@ public class GUI extends JFrame {
         ActionListener onClick = (e)->{
             final JButton bt = (JButton)e.getSource();
             final Pair<Integer,Integer> pos = buttons.get(bt);
-            boolean aMineWasFound = this.logics.hit(pos) == -1; // call the logic here to tell it that cell at 'pos' has been seleced
-            if (aMineWasFound) {
-                quitGame();
-                JOptionPane.showMessageDialog(this, "You lost!!");
+            if (this.logics.getFlags().contains(pos)){
+                drawBoard();
             } else {
-                drawBoard();            	
-            }
-            boolean isThereVictory = this.logics.isWin(); // call the logic here to ask if there is victory
-            if (isThereVictory){
-                quitGame();
-                JOptionPane.showMessageDialog(this, "You won!!");
-                System.exit(0);
+                boolean aMineWasFound = this.logics.hit(pos) == -1; // call the logic here to tell it that cell at 'pos' has been selected
+                if (aMineWasFound) {
+                    quitGame();
+                    JOptionPane.showMessageDialog(this, "You lost!!");
+                    System.exit(0);
+                } else {
+                    drawBoard();
+                }
+                boolean isThereVictory = this.logics.isWin(); // call the logic here to ask if there is victory
+                if (isThereVictory) {
+                    quitGame();
+                    JOptionPane.showMessageDialog(this, "You won!!");
+                    System.exit(0);
+                }
             }
         };
 
@@ -49,6 +54,7 @@ public class GUI extends JFrame {
                 final JButton bt = (JButton)e.getSource();
                 if (bt.isEnabled()){
                     final Pair<Integer,Integer> pos = buttons.get(bt);
+                    logics.setFlag(pos);
                     // call the logic here to put/remove a flag
                 }
                 drawBoard(); 
@@ -91,8 +97,13 @@ public class GUI extends JFrame {
                     // call the logic here
                     // if this button is a cell with counter, put the number
                     // if this button has a flag, put the flag
-
                 }
+            }
+            if (this.logics.getFlags().contains(entry.getValue())){
+                entry.getKey().setText("X");
+            }
+            if (!this.logics.getOpenCells().containsKey(entry.getValue()) && !this.logics.getFlags().contains(entry.getValue())){
+                entry.getKey().setText(" ");
             }
         }
     }

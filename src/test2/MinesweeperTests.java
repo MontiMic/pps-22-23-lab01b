@@ -68,4 +68,12 @@ class MinesweeperTests {
         assertFalse(this.logic.isWin());
     }
 
+    @Test
+    void testPutAndRemoveFlag(){
+        this.logic.setFlag(new Pair<>(0, 0));
+        assertEquals(1, this.logic.getFlags().size());
+        this.logic.setFlag(new Pair<>(0, 0));
+        assertEquals(0, this.logic.getFlags().size());
+    }
+
 }

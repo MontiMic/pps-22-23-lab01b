@@ -8,6 +8,8 @@ public class LogicsImpl implements Logics {
     private final Map<Pair<Integer, Integer>, Integer> cells = new HashMap<>();
     private final static int NUMBER_OF_MINES = 7;
     private final int size;
+    private boolean initialized = false;
+    private final Set<Pair<Integer, Integer>> flags = new HashSet<>();
 
     public LogicsImpl(int size) {
         this.size = size;
@@ -29,6 +31,9 @@ public class LogicsImpl implements Logics {
 
     @Override
     public int hit(Pair<Integer, Integer> pos) {
+        if (!initialized){
+            this.firstStrike(pos);
+        }
         if (this.mines.contains(pos)){
             return -1;
         } else {
@@ -74,6 +79,31 @@ public class LogicsImpl implements Logics {
     @Override
     public boolean isWin() {
         return this.cells.size() == (this.size * this.size) - this.getNumberOfMines();
+    }
+
+    @Override
+    public Set<Pair<Integer, Integer>> getFlags() {
+        return this.flags;
+    }
+
+    @Override
+    public void setFlag(Pair<Integer, Integer> pos) {
+        if (this.flags.contains(pos)){
+            this.flags.remove(pos);
+        } else {
+            this.flags.add(pos);
+        }
+    }
+
+    private void firstStrike(Pair<Integer, Integer> pos){
+        Random random = new Random();
+        while (this.countAdjacentMines(pos) > 0){
+            this.mines.clear();
+            while (this.mines.size() <  NUMBER_OF_MINES){
+                this.mines.add(new Pair<>(random.nextInt(size), random.nextInt(size)));
+            }
+        }
+        this.initialized = true;
     }
 
 }
