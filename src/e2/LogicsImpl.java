@@ -6,10 +6,11 @@ public class LogicsImpl implements Logics {
 
     private final Set<Pair<Integer, Integer>> mines = new HashSet<>();
     private final Map<Pair<Integer, Integer>, Integer> cells = new HashMap<>();
-    private final static int NUMBER_OF_MINES = 10;
-    private final static int SIZE = 9;
+    private final static int NUMBER_OF_MINES = 7;
+    private final int size;
 
     public LogicsImpl(int size) {
+        this.size = size;
         Random random = new Random();
         while (this.mines.size() <  NUMBER_OF_MINES){
             this.mines.add(new Pair<>(random.nextInt(size), random.nextInt(size)));
@@ -17,6 +18,7 @@ public class LogicsImpl implements Logics {
     }
 
     public LogicsImpl(Set<Pair<Integer, Integer>> mines){
+        this.size = 7;
         this.mines.addAll(mines);
     }
 
@@ -55,7 +57,7 @@ public class LogicsImpl implements Logics {
         for (int i = -1; i < 2; i++){
             for (int j = -1; j < 2; j++){
                 Pair<Integer, Integer> neighbor = new Pair<>(pos.getX() + i, pos.getY() + j);
-                if (neighbor.getX() < SIZE && neighbor.getY() < SIZE && neighbor.getX() >=0 && neighbor.getY() >=0 && !neighbor.equals(pos)){
+                if (neighbor.getX() < this.size && neighbor.getY() < this.size && neighbor.getX() >=0 && neighbor.getY() >=0 && !neighbor.equals(pos)){
                     if (!this.getOpenCells().containsKey(neighbor)){
                         this.hit(neighbor);
                     }
