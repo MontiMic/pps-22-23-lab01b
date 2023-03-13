@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MinesweeperTests {
 
     private Logics logic;
-    private final static int SIZE = 9;
+    private final static int SIZE = 7;
     private final Set<Pair<Integer, Integer>> mines = new HashSet<>();
 
     @BeforeEach
@@ -52,7 +52,20 @@ class MinesweeperTests {
 
     @Test
     void testAutoExpansion(){
-        assertEquals(0, this.logic.hit(new Pair<>(9, 9)));
+        assertEquals(0, this.logic.hit(new Pair<>(6, 6)));
         assertNotEquals(1, this.logic.getOpenCells().size());
     }
+
+    @Test
+    void testVictory(){
+        this.logic.hit(new Pair<>(6, 6));
+        assertTrue(this.logic.isWin());
+    }
+
+    @Test
+    void testNotAWin(){
+        this.logic.hit(new Pair<>(0, 2));
+        assertFalse(this.logic.isWin());
+    }
+
 }

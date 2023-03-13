@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
 
+import java.io.Serial;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
     
+    @Serial
     private static final long serialVersionUID = -6218820567019985015L;
     private final Map<JButton,Pair<Integer,Integer>> buttons = new HashMap<>();
     private final Logics logics;
@@ -33,7 +35,7 @@ public class GUI extends JFrame {
             } else {
                 drawBoard();            	
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
+            boolean isThereVictory = this.logics.isWin(); // call the logic here to ask if there is victory
             if (isThereVictory){
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");

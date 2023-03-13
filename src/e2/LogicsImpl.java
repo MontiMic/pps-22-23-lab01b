@@ -71,4 +71,9 @@ public class LogicsImpl implements Logics {
         return this.cells;
     }
 
+    @Override
+    public boolean isWin() {
+        return this.cells.size() == (this.size * this.size) - this.getNumberOfMines();
+    }
+
 }

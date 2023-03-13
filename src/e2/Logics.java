@@ -10,4 +10,5 @@ public interface Logics {
 
     Map<Pair<Integer, Integer>, Integer> getOpenCells();
 
+    boolean isWin();
 }
