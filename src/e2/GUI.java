@@ -28,9 +28,7 @@ public class GUI extends JFrame {
         ActionListener onClick = (e)->{
             final JButton bt = (JButton)e.getSource();
             final Pair<Integer,Integer> pos = buttons.get(bt);
-            if (this.logics.getFlags().contains(pos)){
-                drawBoard();
-            } else {
+            if (!this.logics.getFlags().contains(pos)){
                 boolean aMineWasFound = this.logics.hit(pos) == -1; // call the logic here to tell it that cell at 'pos' has been selected
                 if (aMineWasFound) {
                     quitGame();
@@ -92,12 +90,16 @@ public class GUI extends JFrame {
             if (this.logics.getOpenCells().containsKey(entry.getValue())){
                 int num = this.logics.getOpenCells().get(entry.getValue());
                 if (num >= 0) {
-                    entry.getKey().setText(String.valueOf(num));
+                    if (num == 0) {
+                        entry.getKey().setText(" ");
+                    } else {
+                        entry.getKey().setText(String.valueOf(num));
+                    }
                     entry.getKey().setEnabled(false);
+                }
                     // call the logic here
                     // if this button is a cell with counter, put the number
                     // if this button has a flag, put the flag
-                }
             }
             if (this.logics.getFlags().contains(entry.getValue())){
                 entry.getKey().setText("X");

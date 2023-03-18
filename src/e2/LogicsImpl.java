@@ -6,7 +6,7 @@ public class LogicsImpl implements Logics {
 
     private final Set<Pair<Integer, Integer>> mines = new HashSet<>();
     private final Map<Pair<Integer, Integer>, Integer> cells = new HashMap<>();
-    private final static int NUMBER_OF_MINES = 7;
+    private final static int NUMBER_OF_MINES = 99;
     private final int size;
     private boolean initialized = false;
     private final Set<Pair<Integer, Integer>> flags = new HashSet<>();
