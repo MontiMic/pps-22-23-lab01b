@@ -1,6 +1,7 @@
 package e2;
 import java.util.Random;
 import java.util.*;
+import java.math.*;
 
 public class LogicsImpl implements Logics {
 
@@ -13,15 +14,12 @@ public class LogicsImpl implements Logics {
 
     public LogicsImpl(int size) {
         this.size = size;
-        Random random = new Random();
-        while (this.mines.size() <  NUMBER_OF_MINES){
-            this.mines.add(new Pair<>(random.nextInt(size), random.nextInt(size)));
-        }
     }
 
     public LogicsImpl(Set<Pair<Integer, Integer>> mines){
         this.size = 7;
         this.mines.addAll(mines);
+        this.initialized = true;
     }
 
     @Override
@@ -95,15 +93,15 @@ public class LogicsImpl implements Logics {
         }
     }
 
+
     private void firstStrike(Pair<Integer, Integer> pos){
         Random random = new Random();
-        while (this.countAdjacentMines(pos) > 0){
-            this.mines.clear();
-            while (this.mines.size() <  NUMBER_OF_MINES){
-                this.mines.add(new Pair<>(random.nextInt(size), random.nextInt(size)));
+        while (this.mines.size() <  NUMBER_OF_MINES){
+            Pair<Integer, Integer> newMine = new Pair<>(random.nextInt(size), random.nextInt(size));
+            if (Math.abs(newMine.getX() - pos.getX()) >= 2 || Math.abs(newMine.getY() - pos.getY()) >= 2) {
+                this.mines.add(newMine);
             }
         }
         this.initialized = true;
     }
-
 }

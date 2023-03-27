@@ -3,6 +3,9 @@ package test1;
 import e1.LogicsImpl;
 import e1.Pair;
 import org.junit.jupiter.api.*;
+
+import java.util.stream.IntStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestEs1 {
@@ -19,7 +22,7 @@ class TestEs1 {
                 IntStream.range(0, SIZE).mapToObj(j -> new Pair<>(i, j))
         ).flatMap(s -> s)
                 .filter(p -> logics.hasKnight(p.getX(), p.getY()))
-                .findFirst();*/
+                .findFirst();
 
     /*private void findPieces(){
         for (int i = 0; i < SIZE; i++) {

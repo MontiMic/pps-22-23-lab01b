@@ -31,6 +31,7 @@ class MinesweeperTests {
 
     @Test
     void testLoseByHittingMine(){
+        assertEquals(0, this.logic.hit(new Pair<>(6, 6)));
         assertEquals(-1, this.logic.hit(new Pair<>(0, 0)));
     }
     @Test
